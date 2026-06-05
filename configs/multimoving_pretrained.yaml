@@ -1,0 +1,139 @@
+# Config used to train the pretrained checkpoint (checkpoint.pt, epoch 46).
+# Update DATASET.root_dir to point to your local dataset directory.
+DATASET:
+  cam_rot_lim: 30.0
+  dataset_file: multi_moving_11/
+  dataset_name: Camera_2021_0917_140611/
+  dataset_type: multi_obj_mvmt/
+  fov:
+  - 90
+  - 90
+  frame_size:
+  - 128
+  - 128
+  reverse_data: true
+  reweight: false
+  root_dir: /path/to/your/dataset/
+  zlim: 5.0
+DEPTH:
+  depth_softmax_beta: 1.0
+  epsilon: 1.0e-22
+  epsilon_depth: 1.0e-05
+DEPTHNET:
+  bilinear: false
+  depth_range: 7.2
+  eps: 0.01
+  input_size:
+  - 128
+  - 128
+  mu: 4.0
+  n_channels: 3
+  n_classes: 1
+  sigma: 2.0
+  special_nonlin: false
+EXPERIMENT:
+  depth_weights: tbd
+  exp_type: multimoving
+  experiment_name: multimoving_EXP1
+  imagination_weights: tbd
+  mlflow_dir: ../mlruns/
+  segmentation_weights: tbd
+FLAGS:
+  depth_truth: false
+  do_segmentation: true
+  obj_pose: false
+  obj_truth: false
+  optimize_depth: true
+  segmentation_truth: false
+IMAGINATION:
+  imagination_params: 7
+  input_loc: false
+IMAGNET:
+  bilinear: false
+  denomin: 8
+  depth_range: 10
+  eps: 0.01
+  n_channels: 4
+  n_classes: 5
+  skip_in_higher: true
+  special_nonlin: false
+REGULARIZE:
+  attention_reg: 0.005
+  depth_weight_reg: 0.1
+  depthloss_reg: 0.1
+  imagine_logit_reg: 0.01
+  imagine_reg: 0.01
+  imagine_reg_thres: 5.0
+  imagine_weight_reg: 0.01
+  latent_code_reg: 0.01
+  latent_pose_var_reg: 0.01
+  mask_overlap_reg: 0.005
+  object_localign_reg: 1.0
+  object_size_reg: 0.3
+  object_translation_reg: 0.01
+  spatial_smoothing: 0.0
+ROTATION:
+  max_yaw: 180.0
+  num_bins: 120
+  vms_interp_conc: 100.0
+  vms_prior_conc: 0.2
+SEGMENTATION:
+  contrastive_loss_pose: false
+  latent_midlayer: 256
+  loc_polar: true
+  output_size_latent: 561
+  seq_mask: false
+  skip_in_higher: true
+SEGNET:
+  bilinear: false
+  denomin: 8
+  eps: 0.01
+  input_size:
+  - 128
+  - 128
+  intermediate_latent_split: 0.0
+  latent_midlayer: 256
+  loc_lim: 7.2
+  mu: 4.0
+  n_channels: 3
+  n_classes: 1
+  output_size_latent: 561
+  sigma: 2.0
+  skip_in_higher: true
+  special_nonlin: false
+  use_RNN: true
+  use_norm: true
+TEST:
+  batch_size_test: 8
+  num_batches_test: 500
+TRAIN:
+  batch_size: 20
+  depthnet_learning_rate: 0.0003
+  epochs: 55
+  eval_num_batches: 20
+  imagnet_learning_rate: 0.0003
+  learning_rate: 0.0003
+  num_bins: 120
+  num_slots: 3
+  num_slots_withbg: 4
+  num_workers: 16
+  output_dir: ../outputs/
+  plotting_in_every: 2000
+  print_in_every: 125
+  random_sampling: true
+  random_seed: 302
+  rbf_sigma:
+  - 0.4
+  - 3
+  save_in_every: 2
+  segment_char_size: 10
+  segment_id_size: 64
+  segment_use_rnn: true
+  segnet_learning_rate: 0.0003
+  shuffle_data: false
+  test_train_split: 0.9
+  val_train_split: 0.05
+  visualization_in_every: 10000
+VALIDATION:
+  eval_num_batches: 20
+  visualization_in_every: 250
