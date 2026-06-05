@@ -10,7 +10,7 @@ import pandas as pd
 
 # local imports
 from .data_utils import image_resize, object_viewpoint_transform,\
-    object_pose_viewpoint_transform, rgb_2_label_map, label_map_2_multi_channel_mask, old_segmentation_reader,\
+    object_pose_viewpoint_transform, rgb_2_label_map, label_map_2_multi_channel_mask,\
     transform_c, camera_viewpoint_transform
 from .variables import return_contexts, return_colormapping
 
@@ -49,8 +49,6 @@ class CustomDatasetMap(Dataset):
         self.split : str = split
         self.test : bool = params["test"]
         self.perframe : bool = params["perframe"]
-        self.non_presplit : bool = params["non_presplit"]
-        
         with open(self.pickled_datamap_path, 'rb') as f: self.data_map = pickle.load(f)
         print('Pickle file loaded')
         self.data_map : Any = pd.DataFrame.from_dict(self.data_map)
@@ -202,10 +200,7 @@ class CustomDatasetMap(Dataset):
                 self.image_size[0], self.image_size[1], inter=cv2.INTER_NEAREST)
         segmentation = torch.tensor(segmentation, dtype=torch.float) #shape: [H x W x 3]
         # Converting segmentation groundtruth from RGB to multi-channel binary masks (ie, slot representation)
-        if not self.non_presplit:
-            segmentation = label_map_2_multi_channel_mask(rgb_2_label_map(segmentation), self.num_slots).permute(2,0,1)
-        if self.non_presplit:
-            segmentation = old_segmentation_reader(segmentation, self.num_slots, self.unique_colors)
+        segmentation = label_map_2_multi_channel_mask(rgb_2_label_map(segmentation), self.num_slots).permute(2,0,1)
         
         return segmentation
 

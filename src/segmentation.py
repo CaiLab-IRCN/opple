@@ -6,7 +6,6 @@ from torch import nn
 # local imports
 from src.models.segmentation_net.net_model import SegNet
 # from src.models.segmentation_vae_net.net_model import BVAE
-from src.models.slot_attention_net.net_model import SlotAttentionAutoEncoder
 import src.utils as utils
 
 grads = {}
